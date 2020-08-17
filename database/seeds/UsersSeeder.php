@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
 
 class UsersSeeder extends Seeder
 {
@@ -21,7 +22,7 @@ class UsersSeeder extends Seeder
         
         User::create([
             'name' => 'Front',
-            'email' => 'admin@test.com',
+            'email' => 'front@test.com',
             'password' => Hash::make('ChangeMe2'),
         ]);        
     }
