@@ -47,3 +47,5 @@ Route::post('operation', function(Request $request) {
         );
     }
 });
+
+Route::post('login', 'Auth\LoginController@login');
