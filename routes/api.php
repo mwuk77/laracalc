@@ -19,33 +19,41 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('operation', function(Request $request) {
-    $operationController = new OperationController();
-    
-    
-    /**
-     * This could become a lot of boiler-plate with more routes added.
-     */
-    $validator = Validator::make($request->all(), ['expression' => ['required']]);
-    
-    if($validator->fails())
-    {
-        return response()->json(
-            [
-                'errors' => $validator->errors()
-            ],
-            400
-        );
-    }
-    else
-    {
-        return response()->json(
-            [
-                'result' => $operationController->execute($request)
-            ],
-            200
-        );
-    }
-});
 
-Route::post('login', 'Auth\LoginController@login');
+Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
+
+/**
+ * Routes behind authentication
+ */
+Route::group(['middleware' => 'auth:api'], function() {
+    
+    Route::post('operation', function(Request $request) {
+        $operationController = new OperationController();
+
+
+        /**
+         * This could become a lot of boiler-plate with more routes added.
+         */
+        $validator = Validator::make($request->all(), ['expression' => ['required']]);
+
+        if ($validator->fails())
+        {
+            return response()->json(
+                [
+                    'errors' => $validator->errors()
+                ],
+                400
+            );
+        }
+        else
+        {
+            return response()->json(
+                [
+                    'result' => $operationController->execute($request)
+                ],
+                200
+            );
+        }
+    });
+    
+});
