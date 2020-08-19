@@ -10,20 +10,24 @@ class UsersSeeder extends Seeder
      *
      * @return void
      */    
-    public function run()
+    public function run() : void
     {
         User::truncate();
         
         User::create([
             'name' => 'Administrator',
-            'email' => 'admin@test.com',
-            'password' => Hash::make('ChangeMe'),
+            'email' => Config::get('user.admin_email'),
+            'password' => Hash::make(
+                Config::get('user.admin_password')
+            ),
         ]);
         
         User::create([
             'name' => 'Front',
-            'email' => 'front@test.com',
-            'password' => Hash::make('ChangeMe2'),
+            'email' => Config::get('user.front_email'),
+            'password' => Hash::make(
+                Config::get('user.front_password')
+            ),
         ]);        
     }
 }
