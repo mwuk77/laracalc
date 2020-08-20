@@ -1,1 +1,36 @@
-//
+$calc_width: 12rem;
+$ds_padding: 1rem;
+$ds_border: 2px;
+$btn_per_row: 4;
+$btn_height: 3rem;
+
+.calculator{
+    width: $calc_width;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.display{
+    width: calc(100% - (2 * #{$ds_padding}) - (2 * #{$ds_border}));
+    padding: $ds_padding;
+    text-align: right;
+}
+
+.buttons{
+    button{
+        width: calc((100% / #{$btn_per_row}));
+        height: $btn_height;        
+    }
+    
+    button.active,
+    button:active{
+        border:2px solid red;
+        outline:none;
+    }
+    
+    button:first-child{
+        width: 50%;
+        float: right;
+        margin-left:50%;
+    }
+}
