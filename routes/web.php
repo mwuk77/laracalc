@@ -14,5 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //If this were more complex it'd be better in a controller
+    $buttons = [
+        'C',
+        '7', '8', '9', '*',
+        '4', '5', '6', '-',
+        '1', '2', '3', '+',
+        '0', '.', '/', '='
+    ];
+    
+    return view('welcome')->with(
+        ['buttons' => $buttons]
+    );
 });
