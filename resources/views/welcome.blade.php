@@ -9,15 +9,21 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         
-        <!-- JS -->
-        <script src="{{ asset('js/app.js') }}"></script>
-        
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>
         <div class="container">
+            <div class="balloon">
+                <div><span>L</span></div>
+                <div><span>A</span></div>
+                <div><span>R</span></div>
+                <div><span>A</span></div>
+                <div><span>C</span></div>
+                <div><span>A</span></div>
+                <div><span>L</span></div>
+                <div><span>C</span></div>
+            </div>
             <div class="content">
-                <h1>Lara-calc</h1>    
                 
                 @yield('calculator', View::make('calculator', 
                     ['buttons' => $buttons]
@@ -25,5 +31,8 @@
                 
             </div>
         </div>
+                
+        <!-- JS -->
+        <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
