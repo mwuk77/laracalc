@@ -1,36 +1,172 @@
-$calc_width: 12rem;
-$ds_padding: 1rem;
+$calc_width: 15rem;
+$calc_color:  #fff;
+
+$ds_color: rgba(0,0,0,0.15);
+$ds_padding: .5rem;
 $ds_border: 2px;
+
 $btn_per_row: 4;
 $btn_height: 3rem;
+$btn_spacing: .5rem;
+
+$clear_col: #ff00007d;
+$operator_col: #81aeff;
+
+$radius: 1rem;
+
+@import 'decorations';
+
+@font-face {
+    font-family: lcd;
+    src: url('../fonts/digital-7.mono.ttf');
+}
+ 
+body{
+    background-color: lightblue;
+    background-image: url('../images/clouds.svg');
+    overflow-x: hidden;
+}
+
+#app{
+    position: absolute;
+    width: calc(100% - 1rem);
+    top: 9rem;
+}
 
 .calculator{
     width: $calc_width;
-    margin-left: auto;
+    margin-left: auto;  
     margin-right: auto;
+    
+    border-radius: $radius;
+    background-color: $calc_color;
+    
+    padding: calc(2 * #{$btn_spacing});
+    
+    box-shadow: inset 0px 0px 21pt 10pt rgba(61,59,61,0.48),
+        5pt 5pt 10pt 0px rgba(61,59,61,0.48);
 }
 
 .display{
+    font-family: lcd;
+    font-size: 2.155rem;
+    line-height: 3rem;
+    
+    background-color: $ds_color;
+    border: 1px inset;
+
     width: calc(100% - (2 * #{$ds_padding}) - (2 * #{$ds_border}));
     padding: $ds_padding;
+
+    height: 2rem;
+
     text-align: right;
 }
 
 .buttons{
+    margin-top: $btn_spacing;
+    
     button{
-        width: calc((100% / #{$btn_per_row}));
+        width: calc((100% / #{$btn_per_row}) - ((((2 * #{$btn_per_row}) - 2) * #{$btn_spacing}) / #{$btn_per_row}));
         height: $btn_height;        
+        margin: $btn_spacing;
+
+        border-radius: calc(#{$radius} / 2);
+
+        font-weight: bold; 
+        font-size: 2.45rem;
+        
+        position: relative;
+        display: inline-block;
+
+        cursor: pointer;
+        color: #FFF;
+        letter-spacing: 1px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+        background: #434343 none repeat scroll 0% 0%;
+        border: 1px solid #242424;
+        border-radius: 4px;
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.25),
+          0 1px 0 rgba(255, 255, 255, 0.25) inset,
+          0 0 0 rgba(0, 0, 0, 0.5) inset,
+          0 1.25rem 0 rgba(255, 255, 255, 0.08) inset,
+          0 -1.25rem 1.25rem rgba(0, 0, 0, 0.3) inset,
+          0 1.25rem 1.25rem rgba(255, 255, 255, 0.1) inset;
+
+        transition: all 0.2s linear 0s;
+
+        text-align: center;
+        text-decoration: none;     
     }
-    
-    button.active,
-    button:active{
-        border:2px solid red;
-        outline:none;
-    }
-    
+
     button:first-child{
-        width: 50%;
+        width: calc(50% - #{$btn_spacing});
         float: right;
         margin-left:50%;
+        margin-right:0;
+        background-color: $clear_col;
     }
+
+    button:nth-child(2),
+    button:nth-child(6),
+    button:nth-child(10),
+    button:nth-child(14){
+        margin-left:0;
+    }    
+
+    button:nth-child(5),
+    button:nth-child(9),
+    button:nth-child(13),
+    button:nth-child(17){
+        margin-right:0;
+        background-color: $operator_col;
+    }    
+
+    button:hover,
+    button:focus {
+      text-decoration: none;
+      box-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.5),
+        0 1px 0 rgba(255, 255, 255, 0.25) inset,
+        0 0 0 rgba(0, 0, 0, 0.25) inset,
+        0 20px 0 rgba(255, 255, 255, 0.03) inset,
+        0 -20px 20px rgba(0, 0, 0, 0.15) inset,
+        0 20px 20px rgba(255, 255, 255, 0.05) inset;
+    }
+
+    button.active,
+    button:active{
+        outline:none;
+        box-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.25),
+            0 1px 0 rgba(255, 255, 255, 0) inset,
+            0 0 5px rgba(0, 0, 0, 0.5) inset,
+            0 20px 0 rgba(255, 255, 255, 0.03) inset,
+            0 -20px 20px rgba(0, 0, 0, 0.15) inset,
+            0 20px 20px rgba(255, 255, 255, 0.05) inset;        
+    }
+    
+    button::before {
+      content: "";
+      display: block;
+      position: absolute;
+      background:-moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+      background:-webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(50%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0)));
+      background:-webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,0) 100%);
+      background:linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,0) 100%);
+      padding: x 12px;
+      top: 0;
+      left: 15%;
+      height: 1px;
+      width: 40%;
+      box-shadow: 0 1px 5px rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease-in-out 0s;
+    }
+    button:active::before {
+      opacity: 0;
+    }
+    button:hover::before {
+      left: 45%;
+    }    
 }
