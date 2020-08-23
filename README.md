@@ -19,7 +19,7 @@ Concepts used:
 
 ### Installation
 - cd to /calculator.
-- Edit  .env and  optionally .env-testing and edit USER_ keys  and DB_ keys.
+- Create and edit  .env and optionally .env-testing and edit USER_ keys  and DB_ keys. Refer to .env.example.
 - Create a database called  laracalc.
 - Setup DB via  migrations  with 'php artisan migrate'.
 - Seed DB with  'php artisan db:seed'.
