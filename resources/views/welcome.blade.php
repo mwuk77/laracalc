@@ -24,7 +24,16 @@
                 <div><span>C</span></div>
             </div>
             <div class="content">
-                
+                <?php
+                    //If this were more complex it'd be better in a model.
+                    $buttons = [
+                        'C',
+                        '7', '8', '9', '*',
+                        '4', '5', '6', '-',
+                        '1', '2', '3', '+',
+                        '0', '.', '/', '='
+                    ];
+                ?>
                 @yield('calculator', View::make('calculator', 
                     ['buttons' => $buttons]
                 ))
