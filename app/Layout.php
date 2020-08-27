@@ -12,8 +12,7 @@ class Layout extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'btns_per_row'
+        'name', 'btns_per_row'
     ];
     
     /**
@@ -21,6 +20,8 @@ class Layout extends Model
      */
     public function keys()
     {
-        return $this->belongsToMany('App\Key')->using('App\LayoutKey');
+        return $this->belongsToMany('App\Key', 'layout_key', 'layout_id', 'key_id')
+                ->withPivot('layout_id', 'key_id', 'order')
+                ->orderBy('layout_key.order');
     } 
 }
