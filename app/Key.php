@@ -21,7 +21,9 @@ class Key extends Model
      */
     public function layouts()
     {
-        return $this->belongsToMany('App\Layout')->using('App\LayoutKey');
+        return $this->belongsToMany('App\Layout', 'layout_key', 'layout_id', 'key_id')
+                ->withPivot('layout_id', 'key_id', 'order')
+                ->orderBy('layout_key.order');
     }     
 
 }
