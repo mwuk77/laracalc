@@ -27,10 +27,12 @@ Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout'
  * Routes behind authentication
  */
 Route::group(['middleware' => 'auth:api'], function() {
+    Route::apiResource('layouts', 'LayoutController')->only([
+        'index', 'show'
+    ]);
     
     Route::post('operation', function(Request $request) {
         $operationController = new OperationController();
-
 
         /**
          * This could become a lot of boiler-plate with more routes added.
@@ -39,21 +41,11 @@ Route::group(['middleware' => 'auth:api'], function() {
 
         if ($validator->fails())
         {
-            return response()->json(
-                [
-                    'errors' => $validator->errors()
-                ],
-                400
-            );
+            return response()->json(['errors' => $validator->errors()], 400);
         }
         else
         {
-            return response()->json(
-                [
-                    'result' => $operationController->execute($request)
-                ],
-                200
-            );
+            return response()->json(['result' => $operationController->execute($request)], 200);
         }
     });
     
