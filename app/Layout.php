@@ -12,6 +12,15 @@ class Layout extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name',
+        'btns_per_row'
     ];
+    
+    /**
+     * The keys that belong to the layout.
+     */
+    public function keys()
+    {
+        return $this->belongsToMany('App\Key')->using('App\LayoutKey');
+    } 
 }
