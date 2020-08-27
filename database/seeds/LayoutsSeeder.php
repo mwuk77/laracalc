@@ -1,5 +1,6 @@
 <?php
 
+use App\Layout;
 use Illuminate\Database\Seeder;
 
 class LayoutsSeeder extends Seeder
@@ -10,13 +11,10 @@ class LayoutsSeeder extends Seeder
      * @return void
      */    
     public function run() : void
-    {
-        //Layout name collides with \UI\Draw\Text\Layout
-        
-        \App\Layout::truncate();
-        
-        \App\Layout::create([
-            'name' => 'simple'
+    {       
+        Layout::create([
+            'name' => 'simple',
+            'btns_per_row' => 4
         ]);
     }
 }
